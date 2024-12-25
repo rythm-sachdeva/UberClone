@@ -67,7 +67,7 @@ const logoutUser = async (req,res,next)=>{
         await blacklistToken.create({token});
     } catch (error) {
         console.log(error.message);
-        return res.status(500).json({message:"couuldn't Log out due to  internal server error"})
+        return res.status(500).json({message:"couldn't Log out due to  internal server error"})
     }
 
     return res.status(200).json({message:"Logout Successfull"})
