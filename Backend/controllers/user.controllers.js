@@ -13,6 +13,7 @@ const registerUser = async (req,res,next) =>
     } 
 
     const {fullname,email,password} = req.body;
+    console.log(fullname)
 
     const hashedPassword = await userModel.hashPassword(password)
 
