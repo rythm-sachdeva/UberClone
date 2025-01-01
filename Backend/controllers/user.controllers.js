@@ -47,7 +47,10 @@ if(!isMatch)
 const token = user.generateAuthToken();
 res.cookie('token',token)
 
-return res.status(200).json({token })
+return res.status(200).json({email:user.email,
+    fullname:user.fullname,
+    token
+})
 }
 
 const userDetails = async (req,res,next)=>{
@@ -63,6 +66,7 @@ return res.status(200).json({userDet})
 const logoutUser = async (req,res,next)=>{
     const token = req.cookies.token || req.headers.authorization.split(' ')[1]; 
     res.clearCookie('token')
+    // console.log(token)
 
     try {
         await blacklistToken.create({token});
