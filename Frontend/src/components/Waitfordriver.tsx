@@ -1,12 +1,13 @@
 
 
-const Waitfordriver = ({setWaitPanel}:{setWaitPanel:any}) => {
+const Waitfordriver = ({setWaitPanel,setdriverFound}:{setWaitPanel:any,setdriverFound:any}) => {
     return (
       <div className="" >
           
           <div className=" flex justify-between">
           <h3 className="font-semibold text-2xl">Looking For Driver</h3>
               <h2 onClick={()=>{setWaitPanel(false)
+               setdriverFound(true)
               }} className="text-2xl"><i className="ri-arrow-down-wide-line"></i></h2>
           </div>
            <div className="flex justify-between flex-col items-center">

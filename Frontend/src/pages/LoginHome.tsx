@@ -5,6 +5,7 @@ import LocationSearchPanel from "../components/LocationSearchPanel"
 import ChooseVehicle from "../components/ChooseVehicle"
 import ConfirmRide from "../components/ConfirmRide"
 import Waitfordriver from "../components/Waitfordriver"
+import Driverfound from "../components/Driverfound"
 
 const LoginHome = () => {
     const [pickUpLocation, setPickUpLocation] = useState<string>("")
@@ -18,6 +19,8 @@ const LoginHome = () => {
     const [confirmPanel,setConfirmpanel] = useState<boolean>(false)
     const waitDriverRef = useRef<HTMLDivElement>(null)
     const [waitPanel,setWaitPanel] = useState<boolean>(false)
+    const driverFoundRef = useRef<HTMLDivElement>(null)
+    const [driverFound,setdriverFound] = useState<boolean>(false)
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -91,6 +94,21 @@ const LoginHome = () => {
            }
        },[waitPanel])
 
+       useGSAP(function(){
+        if(driverFound)
+            {
+               gsap.to(driverFoundRef.current,{
+                   transform:'translateY(0)'
+               })
+            }
+           else
+           {
+               gsap.to(driverFoundRef.current,{
+                   transform:'translateY(100%)'
+               })
+           }
+       },[driverFound])
+
 
 
   return (
@@ -133,7 +151,10 @@ const LoginHome = () => {
           <ConfirmRide setConfirmPanel={setConfirmpanel} setWaitPanel={setWaitPanel}  />
         </div>
         <div ref={waitDriverRef} className="fixed w-full z-10 bottom-0 bg-white px-3 py-6">
-          <Waitfordriver setWaitPanel={setWaitPanel} />
+          <Waitfordriver setWaitPanel={setWaitPanel} setdriverFound={setdriverFound} />
+        </div>
+        <div ref={driverFoundRef} className="fixed w-full z-10 bottom-0 bg-white px-3 py-6">
+          <Driverfound setdriverFound={setdriverFound} />
         </div>
     </div>
   )
